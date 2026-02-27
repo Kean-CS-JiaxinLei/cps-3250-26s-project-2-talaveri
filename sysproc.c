@@ -1,3 +1,4 @@
+
 #include "types.h"
 #include "x86.h"
 #include "defs.h"
@@ -88,4 +89,12 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int
+sys_shutdown(void)
+{
+  outw(0xB004, 0x2000);
+  outw(0x604, 0x2000);
+  return 0;
 }
